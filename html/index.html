@@ -22,6 +22,33 @@
         <div>
            <button id="start_stop" class="btn btn-lg btn-primary">START</button>
         </div>
+
+        <script>
+            //10秒未満のとき"0"を追加する
+            var addZero = function(value) {
+                if (value < 10) {
+                    value = '0' + value;
+                }
+                return value;
+            }
+
+            //現在日時を取得する
+            var now = new Date();
+
+            //秒を取得する
+            var seconds = now.getSeconds();
+            seconds = addZero(seconds);
+
+            //分を取得する
+            var minitus = now.getMinutes();
+            minitus = addZero(minitus);
+
+            //時を取得する
+            var hours = now.getHours();
+            hours = addZero(hours); 
+
+            document.getElementById('timer').innerHTML =　hours + ':' + minitus + ':' + seconds;
+        </script>
     </div>
 </body>
 </html>
