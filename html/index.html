@@ -24,34 +24,21 @@
         </div>
 
         <script>
-            //10秒未満のとき"0"を追加する
-            var addZero = function(value) {
-                if (value < 10) {
-                    value = '0' + value;
-                }
-                return value;
-            }
 
             //STARTボタンをクリックしたときに時刻を表示させる
             document.getElementById('start_stop').addEventListener('click', function() {
 
-                //現在日時を取得する
-                var now = new Date();
+                var start = new Date();
 
-                //秒を取得する
-                var seconds = now.getSeconds();
-                seconds = addZero(seconds);
-
-                //分を取得する
-                var minitus = now.getMinutes();
-                minitus = addZero(minitus);
-
-                //時を取得する
-                var hours = now.getHours();
-                hours = addZero(hours); 
-
-                document.getElementById('timer').innerHTML =　hours + ':' + minitus + ':' + seconds;
+                setInterval(goTimer, 10);
             });
+
+            var goTimer = function() {
+                var now = new Date;
+
+                document.getElementById('timer').innerHTML = now.getTime();
+            }
+
         </script>
     </div>
 </body>
