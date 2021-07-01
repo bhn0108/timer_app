@@ -24,16 +24,35 @@
         </div>
 
         <script>
+            //内部処理記述
 
-            //STARTボタンをクリックしたときに時刻を表示させる
+            //グローバル変数宣言
             var start;
+            var timer_id;
+
+            //STARTおよびSTOPボタンを押下したときの処理
             document.getElementById('start_stop').addEventListener('click', function() {
 
-                start = new Date();
+                //STARTボタンを押下したとき
+                if (this.innerHTML === 'START') {
+                    start = new Date();
+                    timer_id = setInterval(goTimer, 10);
+                
+                    this.innerHTML = 'STOP';
+                    this.classList.remove('btn-primary');
+                    this.classList.add('btn-danger');
 
-                setInterval(goTimer, 10);
+                //STARTボタンを押下したとき
+                } else {
+                    clearInterval(timer_id);
+
+                    this.innerHTML = 'START';
+                    this.classList.remove('btn-danger');
+                    this.classList.add('btn-primary'); 
+                }
             });
 
+            //10以下(1桁)のとき10の位を0にする
             var addZero = function(value) {
                 if (value < 10) {
                     value = '0' + value;
@@ -42,21 +61,24 @@
                 return value;
             }
 
+            //時間を取得し表示する
             var goTimer = function() {
                 var now = new Date;
 
-                var milli = now.getTime() - start.getTime();
-                var seconds = Math.floor(milli / 1000);
-                var minitus = Math.floor(seconds/ 60);
-                var hours = Math.floor(minitus / 60)
+                var milli = now.getTime() - start.getTime();　//現在時間からスタート時間を引いたも（ミリ秒）
+                var seconds = Math.floor(milli / 1000); //秒数を取得
+                var minitus = Math.floor(seconds/ 60); //分数を取得
+                var hours = Math.floor(minitus / 60); //時間を取得
 
-                seconds = seconds - minitus * 60;
-                minitus = minitus - hours * 60;
+                seconds = seconds - minitus * 60; //秒数が60を超えたとき秒数表示を00に戻す
+                minitus = minitus - hours * 60; //分数が60を超えたとき分数表示を00に戻す
 
+                //10以下のとき10の位を0にする
                 seconds = addZero(seconds);
                 minitus = addZero(minitus);
                 hours = addZero(hours);
 
+                //時間を表示する
                 document.getElementById('timer').innerHTML = hours + ':' + minitus + ':' + seconds;
             }
 
