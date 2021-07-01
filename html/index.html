@@ -32,22 +32,26 @@
                 return value;
             }
 
-            //現在日時を取得する
-            var now = new Date();
+            //STARTボタンをクリックしたときに時刻を表示させる
+            document.getElementById('start_stop').addEventListener('click', function() {
 
-            //秒を取得する
-            var seconds = now.getSeconds();
-            seconds = addZero(seconds);
+                //現在日時を取得する
+                var now = new Date();
 
-            //分を取得する
-            var minitus = now.getMinutes();
-            minitus = addZero(minitus);
+                //秒を取得する
+                var seconds = now.getSeconds();
+                seconds = addZero(seconds);
 
-            //時を取得する
-            var hours = now.getHours();
-            hours = addZero(hours); 
+                //分を取得する
+                var minitus = now.getMinutes();
+                minitus = addZero(minitus);
 
-            document.getElementById('timer').innerHTML =　hours + ':' + minitus + ':' + seconds;
+                //時を取得する
+                var hours = now.getHours();
+                hours = addZero(hours); 
+
+                document.getElementById('timer').innerHTML =　hours + ':' + minitus + ':' + seconds;
+            });
         </script>
     </div>
 </body>
